@@ -13,6 +13,7 @@
         <button class="button" type="submit">{{ url == '/registrar' ? 'Registrar-se' : 'Logar-se'}}</button>
         <p *ngIf="errorMsg">{{ errorMsg }}</p>
         <p *ngIf="url == '/registrar'">Já tem uma conta? <a routerLink="/login">faça login</a></p>
+        <p *ngIf="url == '/login'">Não tem uma conta? <a routerLink="/registrar">registre-se</a></p>
     </form>
     
 </div>
