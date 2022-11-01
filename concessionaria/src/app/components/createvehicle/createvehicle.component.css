@@ -1,0 +1,35 @@
+.form-vehicle-container{
+    padding: 100px;
+    width: 30%;
+    margin: auto;
+    margin-top: 100px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+.delete-icon{
+    color: red;
+    display: flex;
+    align-items: center;
+
+}
+.delete-icon span{
+    color: black;
+}
+.delete-icon:hover{
+    cursor: pointer;
+}
+.form-vehicle-container form{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+.form-vehicle-container .button{
+    margin-top: 40px;
+    flex: 0 0 100%;
+}
+.mat-form-field{
+    flex: 0 0 40%;
+}
+.file-input{
+    color: #00000099;
+}

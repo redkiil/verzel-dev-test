@@ -1,0 +1,16 @@
+<section class="header">
+    <div class="logo"></div>
+    <nav class="menu">
+        <a class="button" routerLink="/carros-usados">Comprar carro</a>
+        <a class="button" routerLink="/veiculo/criar">Vender carro</a>
+    </nav>
+
+    <div class="register" routerLink="/registrar" *ngIf="!userService.isAuthenticated()">
+        <mat-icon class="account" svgIcon="account-circle-outline"></mat-icon>
+        <span>Cadastre-se</span>
+    </div>
+    <div class="register" *ngIf="userService.isAuthenticated()" (click)="Logout()">
+        <mat-icon class="account" svgIcon="account-circle-outline"></mat-icon>
+        <span>Logout</span>
+    </div>
+</section>

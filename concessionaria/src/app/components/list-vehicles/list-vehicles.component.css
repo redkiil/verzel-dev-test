@@ -1,0 +1,210 @@
+.list{
+    margin: auto;
+    margin-top: 20px;
+    width: 75%;
+}
+button:hover{
+    cursor: pointer;
+}
+.header-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.filter{
+    flex: 1 1 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.filter .toggle{
+    height: 24px;
+    background-color: transparent;
+    border: 0;
+    font-weight:800;
+    display: inline-flex;
+    align-items: center;
+}
+.filter .clear{
+    height: 24px;
+    background-color: transparent;
+    border: 0;
+    font-weight: 900;
+    display: inline-flex;
+    align-items: center;
+    color: #898989;
+}
+.filter .clear:hover{
+    text-decoration: underline;
+    color: black;
+}
+.order{
+    box-sizing: border-box;
+    flex: 1 1 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0 30px;
+    flex-wrap: wrap;
+}
+.order .results{
+    color: #898989;
+    font-weight: 500;
+}
+.order button{
+    height: 24px;
+    background-color: transparent;
+    border: 0;
+    font-size: .8rem;
+    font-weight: bold;
+}
+.order .ordering-item{
+    color: #3374db;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+}
+.ordering-item .ordering-list{
+    width: 110px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    position: absolute;
+    top: 30px;
+    z-index: 10;
+}
+.ordering-list .ordering-list-item{
+    text-align: left;
+    padding: 10px 10px;
+    font-size: .9rem;
+    color: #333;
+}
+.ordering-list :not(:first-child){
+    border-top: 1px solid #e9eef7;
+}
+.ordering-list .ordering-list-item:hover{
+    background-color: #e9e9e9;
+}
+.order .filter-values-container{
+    flex: 0 0 100%;
+    display: flex;
+}
+.filter-values-container .filter-values{
+    display: flex;
+    align-items: center;
+    border: 1px solid #e9eef7;
+    padding: 5px 5px;
+    margin: 5px;
+    color: #3374db;
+    font-weight: 500;
+}
+.content-row{
+    margin-top: 10px;
+    display: flex;
+
+}
+.filter-tab{
+    flex: 1 1 20%;
+}
+.filter-accordion > .accordion-item{
+    display: block;
+    border-bottom: 1px solid #c7c7c7;
+}
+.filter-accordion:first-child > .accordion-item{
+    border-top: 1px solid #c7c7c7;
+}
+.expandable-item{
+    box-sizing: border-box;
+    width: 100%;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    
+}
+.expandable-item:hover{
+    cursor: pointer;
+}
+.expandable-item .expandable-item-text{
+    font-size: 1.1rem;
+}
+.expandable-item .expandable-item-icon{
+    color: #3374db;
+}
+
+.brand-accordion-item-header{
+    border-radius: 5px;
+    width: 80%;
+    margin: 15px;
+    font-size: 1.2rem;
+    padding: 10px;
+}
+.active{
+    color: white;
+    background-color: #3374db;
+}
+.brand-accordion-item-header:hover{
+    cursor: pointer;
+}
+.brand-accordion-item-body{
+    margin: 15px;
+    width: 100%;
+}
+.brand-model-button{
+    background-color: transparent;
+    border: 1px solid #c7c7c7;
+    border-radius: 5px;
+    margin: 0px 5px;
+    padding: 5px;
+    width: fit-content;
+    height: fit-content;
+    font-size: 1.2rem;
+    color: #5b5b5b;
+}
+.brand-model-button:hover{
+    background-color: #f0ebeb;
+}
+.list-vehicles{
+    margin-left: 20px;
+    flex: 0 1 80%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.vehicle-card {
+    box-sizing: border-box;
+    flex: 0 0 32%;
+    max-height: 280px;
+    margin: 0;
+    padding: 0;
+}
+.vehicle-card mat-card-title{
+    font-size: 1rem;
+}
+.vehicle-card-image{
+    border-radius: 10px 10px 0px 0px;
+    width: 100%;
+    height: 70%;
+}
+.vehicle-card-container-description{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.vehicle-card-container-description .edit-button{
+    height: 30px;
+    margin-right: 10px;
+}
+.vehicle-card-description{
+    padding-left: 20px;
+}
+.vehicle-card-price{
+    color: #3374db;
+}
+.edit-button{
+    display: inline;
+}
+::ng-deep .ngx-slider .ngx-slider-pointer, ::ng-deep .ngx-slider .ngx-slider-selection{
+    background-color: #3374db !important;
+}

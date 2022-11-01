@@ -1,0 +1,55 @@
+<div class="form-vehicle-container">
+    <div *ngIf="id" class="delete-icon" (click)="deleteVehicle()">
+        <mat-icon class="account" fontIcon="delete"></mat-icon>
+        <span>Deletar veiculo</span>
+    </div>
+    <form [formGroup]="createVehicleForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+        <mat-form-field appearance="standard">
+            <mat-label>Modelo:</mat-label>
+            <input matInput placeholder="Ex: Celta" formControlName="model">
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+            <mat-label>Marca:</mat-label>
+            <input matInput placeholder="Ex: Chevrollet" formControlName="brand">
+        </mat-form-field>
+   
+        <mat-form-field appearance="standard">
+            <mat-label>Qtd portas:</mat-label>
+            <input matInput placeholder="Ex: 2" formControlName="doors">
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+            <mat-label>Ano:</mat-label>
+            <input matInput placeholder="Ex: 2015" formControlName="year">
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+            <mat-label>Quilometragem:</mat-label>
+            <input matInput placeholder="Ex: 138000" formControlName="hodometer">
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+            <mat-label>Preço:</mat-label>
+            <input matInput placeholder="Ex: R$ 30000" formControlName="price">
+        </mat-form-field>
+
+        <mat-form-field appearance="standard">
+            <mat-label>Cor:</mat-label>
+            <input matInput placeholder="Ex: Prata" formControlName="color">
+        </mat-form-field>
+        <mat-form-field appearance="standard">
+            <mat-label>Localização:</mat-label>
+            <input matInput placeholder="Ex: R$ Campinas/SP" formControlName="location">
+        </mat-form-field>
+
+
+        <div class="file-input">
+            Foto:
+            <input type="file" formControlName="photo" (change)="onFileChange($event)">
+        </div>
+
+
+        <button class="button" type="submit">Enviar</button>
+        <p *ngIf="errorMsg">{{ errorMsg }}</p>
+    </form>
+    
+</div>
+

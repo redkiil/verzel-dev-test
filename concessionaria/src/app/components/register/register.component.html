@@ -1,0 +1,19 @@
+<div class="form-register-container">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="standard">
+            <mat-label>Username:</mat-label>
+            <input matInput placeholder="Ex: joao" formControlName="username">
+            <mat-icon matSuffix>perm_identity</mat-icon>
+        </mat-form-field>
+            <mat-form-field appearance="standard">
+            <mat-label>Password:</mat-label>
+            <input matInput placeholder="Ex: senha123" type="password"  formControlName="password">
+            <mat-icon matSuffix>lock</mat-icon>
+        </mat-form-field>
+        <button class="button" type="submit">{{ url == '/registrar' ? 'Registrar-se' : 'Logar-se'}}</button>
+        <p *ngIf="errorMsg">{{ errorMsg }}</p>
+        <p *ngIf="url == '/registrar'">Já tem uma conta? <a routerLink="/login">faça login</a></p>
+    </form>
+    
+</div>
+

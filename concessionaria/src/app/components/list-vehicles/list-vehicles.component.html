@@ -1,0 +1,155 @@
+<mat-card class="list">
+    <mat-card-subtitle>CARROS USADOS</mat-card-subtitle>
+    <div class="header-row">
+        <div class="filter">
+            <button class="toggle" (click)="toogleFilter = !toogleFilter">
+                <span><mat-icon class="filter-icon" fontIcon="filter_list"></mat-icon></span>
+                <span>{{ toogleFilter ? 'Ocultar filtros' : 'Mostrar filtros' }}</span>
+            </button>
+            <button class="clear" (click)="clearFilterParameters()">Limpar filtros</button>
+        </div>
+        <div class="order">
+            
+            <span class="results">{{ numberResults$ | async }} Resultados</span>
+            <button (click)="orderMenu = !orderMenu">
+                <span class="ordering">Ordernar:</span>
+                <div class="ordering-item">{{orderMenuCurValue}}
+                    <mat-icon class="filter-icon" fontIcon="{{ orderMenu ? 'expand_less' : 'expand_more' }}"></mat-icon>  
+                    <div class="ordering-list" *ngIf="orderMenu">
+                        <div class="ordering-list-item" (click)="updateOrderState({by: 'price', order: 'desc'}, 'Maior preço')">Maior preço</div>
+                        <div class="ordering-list-item" (click)="updateOrderState({by: 'price', order: 'asc'}, 'Menor preço')">Menor preço</div>
+                    </div>
+                </div>
+            </button>
+            <div class="filter-values-container" >
+                <div class="filter-values" *ngFor="let filter of filterValues$ | async" delFilterButton="{{ filter.query }}">
+                    <ng-container *ngIf="filter.query != 'min' && filter.query != 'max'">
+                        {{ filter.value }}
+                    </ng-container>
+                    <ng-container *ngIf="filter.query == 'max'">
+                        {{ 'Max: ' + (filter.value | currency :'BRL':'symbol':'1.0')}}
+                    </ng-container>
+                    <ng-container *ngIf="filter.query == 'min'">
+                        {{ 'Min: ' + (filter.value | currency :'BRL':'symbol':'1.0')}}
+                    </ng-container>
+                    <mat-icon fontIcon="close"></mat-icon>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-row">
+        <h3 *ngIf="(filter | json) == '{}'">Nenhum filtro encontrado!</h3>
+        <div class="filter-tab" *ngIf="toogleFilter && (filter | json) != '{}'">
+            <cdk-accordion class="filter-accordion">
+                <cdk-accordion-item role="button" 
+                    #accordionItemModel="cdkAccordionItem"
+                    [attr.id]="'accordion-header-model'"
+                    [attr.aria-expanded]="accordionItemModel.expanded"
+                    [attr.aria-controls]="'accordion-body-model'"
+                    class="accordion-item">
+                    <div class="expandable-item" (click)="accordionItemModel.toggle()">
+                        <span class="expandable-item-text">Marca e modelo</span>
+                        <span class="expandable-item-icon">
+                            <mat-icon fontIcon="{{ accordionItemModel.expanded ? 'expand_less' : 'expand_more' }}"></mat-icon>
+                        </span>
+                        </div>
+                    <div
+                        class="expandable-item-body"
+                        role="region"
+                        [style.display]="accordionItemModel.expanded ? '' : 'none'"
+                        [attr.id]="'accordion-body-model'"
+                        [attr.aria-labelledby]="'accordion-header-model'">
+                        <cdk-accordion class="brands-accordion">
+                            <cdk-accordion-item
+                              *ngFor="let item of filter?.vehicles | keyvalue; let index = index;"
+                              #accordionItem="cdkAccordionItem"
+                              class="brand-accordion-item"
+                              role="button"
+                              tabindex="0"
+                              [attr.id]="'accordion-header-' + index"
+                              [attr.aria-expanded]="accordionItem.expanded"
+                              [attr.aria-controls]="'accordion-body-' + index">
+                              <div class="brand-accordion-item-header" [ngClass]="accordionItem.expanded ? 'active' : ''" (click)="accordionItem.toggle()" addFilterButton="brand">
+                                {{ item.key }}
+                              </div>
+                              <div
+                                class="brand-accordion-item-body"
+                                role="region"
+                                [style.display]="accordionItem.expanded ? '' : 'none'"
+                                [attr.id]="'accordion-body-' + index"
+                                [attr.aria-labelledby]="'accordion-header-' + index">
+                                <ng-container *ngFor="let model of item.value | keyvalue">
+                                    <button class="brand-model-button" addFilterButton="model">{{ model.value }}</button>
+                                  </ng-container>
+                              </div>
+                            </cdk-accordion-item>
+                          </cdk-accordion>
+                          
+                    </div>
+                </cdk-accordion-item>
+
+                
+            </cdk-accordion>
+            <cdk-accordion class="filter-accordion">
+                <cdk-accordion-item role="button" 
+                    #accordionItemPrice="cdkAccordionItem"
+                    [attr.id]="'accordion-header-price'"
+                    [attr.aria-expanded]="accordionItemPrice.expanded"
+                    [attr.aria-controls]="'accordion-body-price'"
+                    class="accordion-item">
+                    <div class="expandable-item" (click)="accordionItemPrice.toggle()">
+                        <span class="expandable-item-text">Preço</span>
+                        <span class="expandable-item-icon">
+                            <mat-icon fontIcon="{{ accordionItemModel.expanded ? 'expand_less' : 'expand_more' }}"></mat-icon>
+                        </span>
+                        </div>
+                    <div
+                        class="expandable-item-body"
+                        role="region"
+                        [style.display]="accordionItemPrice.expanded ? '' : 'none'"
+                        [attr.id]="'accordion-body-price'"
+                        [attr.aria-labelledby]="'accordion-header-price'">
+                        <cdk-accordion class="brands-accordion">
+                            <cdk-accordion-item
+                              #accordionItem="cdkAccordionItem"
+                              class="brand-accordion-item"
+                              role="button"
+                              tabindex="0"
+                              [attr.id]="'accordion-header-price'"
+                              [attr.aria-expanded]="accordionItem.expanded"
+                              [attr.aria-controls]="'accordion-body-price'">
+                              <div class="price-accordion-item-header" (click)="accordionItem.toggle()">
+                                <ngx-slider [(value)]="priceValue" [(highValue)]="priceHighValue" [options]="priceOptions" (userChangeEnd)="updatePriceRange()"></ngx-slider>
+                              </div>
+                              
+                            </cdk-accordion-item>
+                          </cdk-accordion>
+                          
+                    </div>
+                </cdk-accordion-item>
+
+                
+            </cdk-accordion>
+        </div>
+        <div class="list-vehicles">
+            <h3 *ngIf="(allVehicles$ | async)?.length==0">Não foi encontrado nenhum veiculo :(</h3>
+            <mat-card class="vehicle-card" *ngFor="let veh of allVehicles$ | async">
+                <img class="vehicle-card-image" src='{{ apiUrl + "/Vehicles/images/" + veh.photo }}'>
+                <div class="vehicle-card-container-description">
+                    <div class="vehicle-card-description">
+                        <mat-card-title>{{ veh.brand }} {{ veh.model }}</mat-card-title>
+                        <mat-card-subtitle>{{ veh.year }} • {{ veh.hodometer }} km • {{ veh.location }}</mat-card-subtitle>
+                        <mat-card-title class="vehicle-card-price">{{ veh.price | currency :'BRL':'symbol':'1.2-2'}}</mat-card-title>
+                    </div>
+                    <ng-container *ngIf="isLoggedIn()">
+                        <button class="edit-button" routerLink="{{ '/veiculo/editar/'+veh.id }}">
+                            <mat-icon fontIcon="edit"></mat-icon>
+                        </button>
+                    </ng-container>
+                </div>
+                
+            </mat-card>
+        </div>
+    </div>
+</mat-card>

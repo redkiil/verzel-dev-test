@@ -1,0 +1,41 @@
+.header{
+    margin: auto;
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo{
+    flex: 0 0 50%;
+    width: 120px;
+    height: 40px;
+    background-image: url('../../../assets/logo.png');
+    background-repeat: no-repeat;
+}
+.menu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 90px;
+    gap: 30px;
+}
+.menu a{
+    color: #333;
+    text-decoration: none;
+    font-size: 1rem;
+}
+.account{
+    fill: #333;
+    width: 30px;
+    height: 30px;
+}
+.register{
+    gap: 5px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+.register:hover{
+    cursor: pointer;
+}
